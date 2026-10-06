@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKPD Interaktif - Standar Jaringan Kabel & Nirkabel</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background-color: white !important; }
+            .card-box { border: 1px solid #cbd5e1 !important; box-shadow: none !important; }
+            textarea, input, select { border: 1px solid #94a3b8 !important; background: transparent !important; }
+        }
+        /* Custom Cable Colors */
+        .color-stripe-wg { background: repeating-linear-gradient(45deg, #10b981, #10b981 8px, #ffffff 8px, #ffffff 16px); }
+        .color-stripe-wo { background: repeating-linear-gradient(45deg, #f97316, #f97316 8px, #ffffff 8px, #ffffff 16px); }
+        .color-stripe-wb { background: repeating-linear-gradient(45deg, #3b82f6, #3b82f6 8px, #ffffff 8px, #ffffff 16px); }
+        .color-stripe-wbr { background: repeating-linear-gradient(45deg, #854d0e, #854d0e 8px, #ffffff 8px, #ffffff 16px); }
+        .bg-cable-g { background-color: #059669; color: white; }
+        .bg-cable-o { background-color: #ea580c; color: white; }
+        .bg-cable-b { background-color: #2563eb; color: white; }
+        .bg-cable-br { background-color: #78350f; color: white; }
+    </style>
+</head>
+<body class="text-slate-800 pb-12">
+
+    <!-- Top Navigation / Header Banner -->
+    <header class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 text-white shadow-lg sticky top-0 z-50 no-print">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="p-3 bg-white/10 rounded-xl backdrop-blur-md border border-white/20">
+                    <i class="fa-solid fa-network-wired text-2xl text-amber-300"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">LKPD DIGITAL INTERAKTIF</h1>
+                    <p class="text-xs text-blue-100">KK Teknik Jaringan Kabel & Nirkabel • SMKN 1 Candipuro</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="bg-white/10 px-4 py-2 rounded-lg text-sm flex items-center gap-3 border border-white/10">
+                    <span>Progres:</span>
+                    <div class="w-32 bg-blue-950 rounded-full h-3 overflow-hidden border border-white/20">
+                        <div id="progressBar" class="bg-gradient-to-r from-amber-400 to-emerald-400 h-full w-0 transition-all duration-300"></div>
+                    </div>
+                    <span id="progressText" class="font-bold text-amber-300">0%</span>
+                </div>
+                <button onclick="window.print()" class="bg-amber-400 hover:bg-amber-300 text-slate-900 px-4 py-2 rounded-lg font-semibold text-sm transition shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Cetak / Simpan PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 pt-8 space-y-8">
+
+        <!-- Header Print Title (Visible only when printing) -->
+        <div class="hidden print-only text-center border-b-2 border-slate-800 pb-4 mb-6">
+            <h1 class="text-2xl font-bold">LEMBAR KERJA PESERTA DIDIK (LKPD)</h1>
+            <h2 class="text-lg font-semibold text-slate-700">BAB 1 - MENGENAL STANDAR JARINGAN KABEL DAN NIRKABEL</h2>
+            <p class="text-sm text-slate-600">SMKN 1 CANDIPURO • KK TEKNIK JARINGAN KABEL & NIRKABEL</p>
+        </div>
+
+        <!-- Section A: Identitas Peserta Didik -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 card-box">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-id-card text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">A. Identitas Peserta Didik</h2>
+                    <p class="text-xs text-slate-500">Isilah data diri dan kelompok kalian sebelum memulai pengerjaan.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Satuan Pendidikan</label>
+                    <input type="text" value="SMKN 1 CANDIPURO" disabled class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-medium text-slate-700">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Mata Pelajaran / Keahlian</label>
+                    <input type="text" value="KK Teknik Jaringan Kabel & Nirkabel" disabled class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-medium text-slate-700">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Fase / Kelas / Alokasi</label>
+                    <input type="text" value="Fase F / XI (3 x 45 Menit)" disabled class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-medium text-slate-700">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Hari / Tanggal</label>
+                    <input type="date" id="inputTanggal" onchange="updateProgress()" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Peserta Didik <span class="text-red-500">*</span></label>
+                    <input type="text" id="inputNama" placeholder="Masukkan nama lengkap" oninput="updateProgress()" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">NISN <span class="text-red-500">*</span></label>
+                    <input type="text" id="inputNisn" placeholder="Masukkan NISN" oninput="updateProgress()" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Kelas <span class="text-red-500">*</span></label>
+                    <input type="text" id="inputKelas" placeholder="Contoh: XI TKJ 1" oninput="updateProgress()" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Kelompok <span class="text-red-500">*</span></label>
+                    <input type="text" id="inputKelompok" placeholder="Contoh: Kelompok 3" oninput="updateProgress()" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-5 card-box">
+                <div class="flex items-center gap-3 text-blue-800 font-bold mb-2">
+                    <i class="fa-solid fa-bullseye text-blue-600"></i>
+                    <h3>Capaian Pembelajaran</h3>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                    Peserta didik mampu menjelaskan standar jaringan kabel (TIA/EIA-568) dan standar jaringan nirkabel (IEEE 802.11) sesuai kebutuhan instalasi jaringan di dunia kerja.
+                </p>
+            </div>
+
+            <div class="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl p-5 card-box">
+                <div class="flex items-center gap-3 text-emerald-800 font-bold mb-2">
+                    <i class="fa-solid fa-graduation-cap text-emerald-600"></i>
+                    <h3>Tujuan Pembelajaran</h3>
+                </div>
+                <ul class="text-xs text-slate-700 list-disc list-inside space-y-1">
+                    <li>Menjelaskan pentingnya standar jaringan.</li>
+                    <li>Membedakan TIA/EIA-568A vs 568B (Straight & Cross).</li>
+                    <li>Mengurutkan evolusi IEEE 802.11 (a/b/g/n/ac/ax).</li>
+                    <li>Menentukan standar jaringan berdasarkan studi kasus.</li>
+                </ul>
+            </div>
+
+            <div class="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-5 card-box">
+                <div class="flex items-center gap-3 text-amber-800 font-bold mb-2">
+                    <i class="fa-solid fa-toolbox text-amber-600"></i>
+                    <h3>Alat & Bahan</h3>
+                </div>
+                <ul class="text-xs text-slate-700 list-disc list-inside space-y-1">
+                    <li>Buku Paket Bab 1 Jaringan Kabel & Nirkabel.</li>
+                    <li>Alat tulis & modul LKPD Digital ini.</li>
+                    <li>Laptop/HP dengan koneksi internet.</li>
+                    <li>Kabel UTP & Konektor RJ-45 (Ruang Praktik).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- KEGIATAN 1 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 card-box">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                <span class="px-3 py-1 bg-blue-600 text-white rounded-lg text-xs font-bold">KEGIATAN 1</span>
+                <h2 class="text-lg font-bold text-slate-900">Memahami Pentingnya Standar Jaringan</h2>
+            </div>
+
+            <div class="space-y-6">
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        1. Jelaskan dengan kalimat sendiri, mengapa standar jaringan seperti TIA/EIA-568 dan IEEE 802.11 sangat diperlukan dalam dunia kerja teknisi jaringan!
+                    </label>
+                    <textarea id="k1_q1" rows="3" oninput="updateProgress()" placeholder="Ketikkan jawaban Anda di sini..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        2. Sebutkan dan jelaskan tiga manfaat utama penerapan standar jaringan secara konsisten!
+                    </label>
+                    <textarea id="k1_q2" rows="3" oninput="updateProgress()" placeholder="1. Interoperabilitas&#10;2. Keandalan&#10;3. Kemudahan Perawatan..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        3. Berikan satu contoh pengalaman kalian sehari-hari (di rumah, sekolah, atau warnet) yang menunjukkan akibat dari tidak diterapkannya standar jaringan dengan benar!
+                    </label>
+                    <textarea id="k1_q3" rows="3" oninput="updateProgress()" placeholder="Contoh: Kabel longgar, koneksi lambat, perangkat beda merk tidak terhubung..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEGIATAN 2 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 card-box">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                <span class="px-3 py-1 bg-indigo-600 text-white rounded-lg text-xs font-bold">KEGIATAN 2</span>
+                <h2 class="text-lg font-bold text-slate-900">Mengidentifikasi Standar Pengkabelan TIA/EIA-568</h2>
+            </div>
+
+            <p class="text-xs text-slate-600 mb-6">
+                Lengkapi urutan warna kabel T568A dan T568B di bawah ini. Pilihlah warna dari menu dropdown untuk setiap nomor Pin!
+            </p>
+
+            <!-- Pre-rendered Wiring Table & Visual Connector -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                <!-- Color Table Form -->
+                <div class="lg:col-span-8 overflow-x-auto">
+                    <table class="w-full text-sm text-left border-collapse border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                        <thead class="bg-indigo-50 text-indigo-900 text-xs uppercase font-bold">
+                            <tr>
+                                <th class="p-3 border border-slate-200 text-center w-16">PIN</th>
+                                <th class="p-3 border border-slate-200">URUTAN WARNA T568A</th>
+                                <th class="p-3 border border-slate-200">URUTAN WARNA T568B</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 bg-white">
+                            <!-- PIN 1 -->
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3 border text-center font-bold text-slate-700 bg-slate-100">1</td>
+                                <td class="p-2 border">
+                                    <select id="pin_568a_1" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 1 (A) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                                <td class="p-2 border">
+                                    <select id="pin_568b_1" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 1 (B) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <!-- PIN 2 -->
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3 border text-center font-bold text-slate-700 bg-slate-100">2</td>
+                                <td class="p-2 border">
+                                    <select id="pin_568a_2" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 2 (A) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                                <td class="p-2 border">
+                                    <select id="pin_568b_2" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 2 (B) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <!-- PIN 3 -->
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3 border text-center font-bold text-slate-700 bg-slate-100">3</td>
+                                <td class="p-2 border">
+                                    <select id="pin_568a_3" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 3 (A) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                                <td class="p-2 border">
+                                    <select id="pin_568b_3" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 3 (B) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <!-- PIN 4 -->
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3 border text-center font-bold text-slate-700 bg-slate-100">4</td>
+                                <td class="p-2 border">
+                                    <select id="pin_568a_4" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 4 (A) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                                <td class="p-2 border">
+                                    <select id="pin_568b_4" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 4 (B) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <!-- PIN 5 -->
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3 border text-center font-bold text-slate-700 bg-slate-100">5</td>
+                                <td class="p-2 border">
+                                    <select id="pin_568a_5" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 5 (A) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                                <td class="p-2 border">
+                                    <select id="pin_568b_5" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 5 (B) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <!-- PIN 6 -->
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3 border text-center font-bold text-slate-700 bg-slate-100">6</td>
+                                <td class="p-2 border">
+                                    <select id="pin_568a_6" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 6 (A) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                                <td class="p-2 border">
+                                    <select id="pin_568b_6" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 6 (B) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <!-- PIN 7 -->
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3 border text-center font-bold text-slate-700 bg-slate-100">7</td>
+                                <td class="p-2 border">
+                                    <select id="pin_568a_7" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 7 (A) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                                <td class="p-2 border">
+                                    <select id="pin_568b_7" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 7 (B) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <!-- PIN 8 -->
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3 border text-center font-bold text-slate-700 bg-slate-100">8</td>
+                                <td class="p-2 border">
+                                    <select id="pin_568a_8" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 8 (A) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                                <td class="p-2 border">
+                                    <select id="pin_568b_8" onchange="onWiringSelectChange()" class="w-full p-2 text-xs border border-slate-300 rounded-lg font-semibold focus:ring-2 focus:ring-indigo-500 bg-white">
+                                        <option value="">-- Pilih Warna Pin 8 (B) --</option>
+                                        <option value="WG">Putih-Hijau</option>
+                                        <option value="G">Hijau</option>
+                                        <option value="WO">Putih-Orange</option>
+                                        <option value="O">Orange</option>
+                                        <option value="WB">Putih-Biru</option>
+                                        <option value="B">Biru</option>
+                                        <option value="WBr">Putih-Cokelat</option>
+                                        <option value="Br">Cokelat</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Interactive RJ-45 Visualizer Panel -->
+                <div class="lg:col-span-4 bg-slate-900 text-white rounded-2xl p-5 flex flex-col justify-between shadow-lg border border-slate-800">
+                    <div>
+                        <!-- Header with Mode Selector -->
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-plug text-amber-400"></i>
+                                <h4 class="text-xs font-extrabold uppercase tracking-wider text-amber-400">VISUAL RJ-45 CONNECTOR</h4>
+                            </div>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono">Pin 1-8</span>
+                        </div>
+
+                        <!-- Tab Selector to switch viewing T568A or T568B -->
+                        <div class="flex rounded-lg bg-slate-800 p-1 mb-4 no-print text-xs font-bold">
+                            <button id="btnTab568B" onclick="switchVisualTab('568B')" class="flex-1 py-1.5 rounded-md text-center bg-indigo-600 text-white shadow">Tabel T568B</button>
+                            <button id="btnTab568A" onclick="switchVisualTab('568A')" class="flex-1 py-1.5 rounded-md text-center text-slate-400 hover:text-white">Tabel T568A</button>
+                        </div>
+
+                        <p id="visualSubtext" class="text-[11px] text-slate-400 mb-3">
+                            Tampilan fisik susunan kabel saat dimasukkan ke dalam RJ-45 (<span class="font-bold text-amber-300">Standar T568B</span>):
+                        </p>
+                        
+                        <!-- Physical Cable Strands Container -->
+                        <div id="visualStrands" class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1.5 shadow-inner">
+                            <!-- Pre-rendered strands 1 to 8 -->
+                            <div id="strand_1" class="h-5 rounded flex items-center justify-between px-2.5 text-[11px] font-mono bg-slate-900 text-slate-500 border border-slate-800">
+                                <span>Pin 1</span><span id="label_1" class="font-bold">-- Belum Dipilih --</span>
+                            </div>
+                            <div id="strand_2" class="h-5 rounded flex items-center justify-between px-2.5 text-[11px] font-mono bg-slate-900 text-slate-500 border border-slate-800">
+                                <span>Pin 2</span><span id="label_2" class="font-bold">-- Belum Dipilih --</span>
+                            </div>
+                            <div id="strand_3" class="h-5 rounded flex items-center justify-between px-2.5 text-[11px] font-mono bg-slate-900 text-slate-500 border border-slate-800">
+                                <span>Pin 3</span><span id="label_3" class="font-bold">-- Belum Dipilih --</span>
+                            </div>
+                            <div id="strand_4" class="h-5 rounded flex items-center justify-between px-2.5 text-[11px] font-mono bg-slate-900 text-slate-500 border border-slate-800">
+                                <span>Pin 4</span><span id="label_4" class="font-bold">-- Belum Dipilih --</span>
+                            </div>
+                            <div id="strand_5" class="h-5 rounded flex items-center justify-between px-2.5 text-[11px] font-mono bg-slate-900 text-slate-500 border border-slate-800">
+                                <span>Pin 5</span><span id="label_5" class="font-bold">-- Belum Dipilih --</span>
+                            </div>
+                            <div id="strand_6" class="h-5 rounded flex items-center justify-between px-2.5 text-[11px] font-mono bg-slate-900 text-slate-500 border border-slate-800">
+                                <span>Pin 6</span><span id="label_6" class="font-bold">-- Belum Dipilih --</span>
+                            </div>
+                            <div id="strand_7" class="h-5 rounded flex items-center justify-between px-2.5 text-[11px] font-mono bg-slate-900 text-slate-500 border border-slate-800">
+                                <span>Pin 7</span><span id="label_7" class="font-bold">-- Belum Dipilih --</span>
+                            </div>
+                            <div id="strand_8" class="h-5 rounded flex items-center justify-between px-2.5 text-[11px] font-mono bg-slate-900 text-slate-500 border border-slate-800">
+                                <span>Pin 8</span><span id="label_8" class="font-bold">-- Belum Dipilih --</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400 flex justify-between items-center">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-lock text-slate-500"></i> Latching Clip Facing Down</span>
+                        <span class="text-emerald-400 font-bold bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800">TIA/EIA-568</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kegiatan 2 Questions -->
+            <div class="space-y-6 pt-2">
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        1. Berdasarkan tabel yang telah kalian lengkapi, jelaskan pasangan warna manakah yang bertukar posisi antara 568A dan 568B, dan pasangan warna manakah yang tetap sama!
+                    </label>
+                    <textarea id="k2_q1" rows="3" oninput="updateProgress()" placeholder="Pasangan bertukar: Putih-Hijau & Hijau bertukar dengan Putih-Orange & Orange. Pasangan tetap: Biru, Putih-Biru, Putih-Cokelat, Cokelat..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        2. Jelaskan perbedaan mendasar antara kabel straight dan kabel cross, lengkap dengan contoh penerapannya masing-masing!
+                    </label>
+                    <textarea id="k2_q2" rows="3" oninput="updateProgress()" placeholder="Straight: Ujung sama (568B-568B) untuk menghubungkan perangkat berbeda (seperti PC ke Switch).\nCross: Ujung berbeda (568A-568B) untuk menghubungkan dua perangkat sejenis secara langsung (seperti PC ke PC)..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        3. (Studi Kasus Kabel) Seorang teknisi hendak menghubungkan dua unit laptop secara langsung tanpa melalui switch. Kabel A (568A - 568A) dan Kabel B (568A - 568B). Kabel manakah yang tepat digunakan? Jelaskan alasan kalian!
+                    </label>
+                    <textarea id="k2_q3" rows="3" oninput="updateProgress()" placeholder="Kabel B (Cross) karena digunakan untuk komunikasi langsung antar dua komputer tanpa perantara switch..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEGIATAN 3 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 card-box">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                <span class="px-3 py-1 bg-purple-600 text-white rounded-lg text-xs font-bold">KEGIATAN 3</span>
+                <h2 class="text-lg font-bold text-slate-900">Menelusuri Evolusi Standar IEEE 802.11</h2>
+            </div>
+
+            <p class="text-xs text-slate-600 mb-6">Lengkapi tabel evolusi WiFi IEEE 802.11 berikut berdasarkan materi Bab 1.3:</p>
+
+            <div class="overflow-x-auto mb-6">
+                <table class="w-full text-sm text-left border-collapse border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                    <thead class="bg-purple-50 text-purple-900 text-xs uppercase font-bold">
+                        <tr>
+                            <th class="p-3 border border-slate-200">Standar</th>
+                            <th class="p-3 border border-slate-200">Frekuensi</th>
+                            <th class="p-3 border border-slate-200">Karakteristik Utama</th>
+                            <th class="p-3 border border-slate-200">Contoh Penerapan yang Tepat</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-xs bg-white">
+                        <tr>
+                            <td class="p-3 border font-bold text-slate-800 bg-slate-50">802.11b/g</td>
+                            <td class="p-3 border"><input type="text" id="wifi_freq_1" oninput="updateProgress()" placeholder="2.4 GHz" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-purple-500"></td>
+                            <td class="p-3 border"><input type="text" id="wifi_char_1" oninput="updateProgress()" placeholder="Kecepatan dasar, jangkauan luas..." class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-purple-500"></td>
+                            <td class="p-3 border"><input type="text" id="wifi_app_1" oninput="updateProgress()" placeholder="Jaringan rumah standar, perangkat legacy" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-purple-500"></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 border font-bold text-slate-800 bg-slate-50">802.11n (WiFi 4)</td>
+                            <td class="p-3 border"><input type="text" id="wifi_freq_2" oninput="updateProgress()" placeholder="2.4 GHz & 5 GHz" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-purple-500"></td>
+                            <td class="p-3 border"><input type="text" id="wifi_char_2" oninput="updateProgress()" placeholder="Memperkenalkan teknologi MIMO..." class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-purple-500"></td>
+                            <td class="p-3 border"><input type="text" id="wifi_app_2" oninput="updateProgress()" placeholder="Kantor kecil, browsing & streaming SD" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-purple-500"></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 border font-bold text-slate-800 bg-slate-50">802.11ac (WiFi 5)</td>
+                            <td class="p-3 border"><input type="text" id="wifi_freq_3" oninput="updateProgress()" placeholder="5 GHz" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-purple-500"></td>
+                            <td class="p-3 border"><input type="text" id="wifi_char_3" oninput="updateProgress()" placeholder="Bandwidth tinggi, MU-MIMO..." class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-purple-500"></td>
+                            <td class="p-3 border"><input type="text" id="wifi_app_3" oninput="updateProgress()" placeholder="Streaming 4K, Transfer file besar" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-purple-500"></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 border font-bold text-slate-800 bg-slate-50">802.11ax (WiFi 6)</td>
+                            <td class="p-3 border"><input type="text" id="wifi_freq_4" oninput="updateProgress()" placeholder="2.4 GHz & 5 GHz (6GHz)" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-purple-500"></td>
+                            <td class="p-3 border"><input type="text" id="wifi_char_4" oninput="updateProgress()" placeholder="OFDMA, efisiensi tinggi di area padat..." class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-purple-500"></td>
+                            <td class="p-3 border"><input type="text" id="wifi_app_4" oninput="updateProgress()" placeholder="Stadion, Kafe ramai, Laboratorium sekolah" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-purple-500"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="space-y-6">
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        1. Mengapa standar 802.11ax (WiFi 6) lebih direkomendasikan untuk lingkungan dengan banyak pengguna dibandingkan standar generasi sebelumnya? Kaitkan jawaban kalian dengan teknologi OFDMA!
+                    </label>
+                    <textarea id="k3_q1" rows="3" oninput="updateProgress()" placeholder="OFDMA memungkinkan pembagian saluran menjadi sub-carrier kecil sehingga dapat melayani banyak perangkat sekaligus tanpa antrean..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        2. Jelaskan fungsi teknologi MIMO yang mulai diperkenalkan pada standar 802.11n!
+                    </label>
+                    <textarea id="k3_q2" rows="3" oninput="updateProgress()" placeholder="MIMO (Multiple Input Multiple Output) menggunakan beberapa antena sekaligus untuk mentransmisikan dan menerima paket data..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEGIATAN 4 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 card-box">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                <span class="px-3 py-1 bg-amber-600 text-white rounded-lg text-xs font-bold">KEGIATAN 4</span>
+                <h2 class="text-lg font-bold text-slate-900">Studi Kasus Penerapan Standar Jaringan</h2>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Case 1 -->
+                <div class="bg-amber-50/60 border border-amber-200 rounded-2xl p-5 space-y-4">
+                    <div class="flex items-center gap-2 text-amber-900 font-bold text-sm">
+                        <i class="fa-solid fa-school text-amber-600"></i>
+                        <h3>Studi Kasus 1: Jaringan Sekolah</h3>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed italic">
+                        "Sebuah SMK hendak membangun jaringan baru untuk menghubungkan tiga laboratorium komputer (masing-masing sekitar 30 unit komputer), ruang guru, dan area perpustakaan yang lebih banyak diakses melalui perangkat mobile siswa."
+                    </p>
+                    
+                    <div class="space-y-4 pt-2">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">
+                                1. Standar pengkabelan apa yang tepat digunakan untuk menghubungkan komputer-komputer di dalam laboratorium ke switch? Jelaskan alasannya!
+                            </label>
+                            <textarea id="k4_case1_q1" rows="2" oninput="updateProgress()" placeholder="Standar TIA/EIA-568B Straight Cable..." class="w-full border border-slate-300 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none bg-white"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">
+                                2. Standar nirkabel apa yang tepat diterapkan pada area perpustakaan? Jelaskan alasannya!
+                            </label>
+                            <textarea id="k4_case1_q2" rows="2" oninput="updateProgress()" placeholder="IEEE 802.11ac atau 802.11ax (WiFi 6)..." class="w-full border border-slate-300 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none bg-white"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 2 -->
+                <div class="bg-emerald-50/60 border border-emerald-200 rounded-2xl p-5 space-y-4">
+                    <div class="flex items-center gap-2 text-emerald-900 font-bold text-sm">
+                        <i class="fa-solid fa-mug-hot text-emerald-600"></i>
+                        <h3>Studi Kasus 2: Jaringan WiFi Kafe</h3>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed italic">
+                        "Sebuah kafe hendak menyediakan layanan WiFi gratis bagi pelanggan. Kafe tersebut biasanya dikunjungi sekitar 50 pelanggan pada jam sibuk, masing-masing membawa minimal satu perangkat mobile."
+                    </p>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-800 mb-1">
+                            1. Standar IEEE 802.11 apa yang paling tepat direkomendasikan untuk kondisi tersebut? Jelaskan alasan teknis di balik rekomendasi kalian (minimal 3 kalimat)!
+                        </label>
+                        <textarea id="k4_case2_q1" rows="3" oninput="updateProgress()" placeholder="Rekomendasi: IEEE 802.11ax (WiFi 6). Alasan: Mampu menangani kepadatan tinggi dengan OFDMA..." class="w-full border border-slate-300 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-white"></textarea>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEGIATAN 5 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 card-box">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                <span class="px-3 py-1 bg-emerald-600 text-white rounded-lg text-xs font-bold">KEGIATAN 5</span>
+                <h2 class="text-lg font-bold text-slate-900">Latihan Kemampuan Akademik</h2>
+            </div>
+
+            <div class="space-y-6">
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        1. (Penalaran Logis) Mengapa penting bagi seorang teknisi jaringan untuk selalu merujuk pada sumber resmi seperti situs IEEE atau TIA, dibandingkan sekadar mengandalkan informasi dari media sosial yang belum tentu terverifikasi kebenarannya?
+                    </label>
+                    <textarea id="k5_q1" rows="3" oninput="updateProgress()" placeholder="Menjaga akurasi teknis, menghindari kesalahan instalasi akibat berita yang belum terverifikasi..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        2. (Kompetensi Dasar Kejuruan) Seorang teknisi diminta memasang jaringan kabel pada sebuah ruangan kantor baru yang akan menghubungkan 10 unit komputer ke satu switch pusat. Standar pengkabelan apakah yang seharusnya digunakan teknisi tersebut, dan jenis kabel apa (straight atau cross) yang tepat diterapkan pada situasi ini?
+                    </label>
+                    <textarea id="k5_q2" rows="3" oninput="updateProgress()" placeholder="Standar TIA/EIA-568B, menggunakan Jenis Kabel Straight..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- REFLEKSI PEMBELAJARAN -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 card-box">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                <span class="px-3 py-1 bg-teal-600 text-white rounded-lg text-xs font-bold">REFLEKSI</span>
+                <h2 class="text-lg font-bold text-slate-900">Refleksi Pembelajaran</h2>
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-800 mb-1">
+                        1. Konsep manakah pada bab ini yang menurut kalian paling mudah dipahami, dan mengapa demikian?
+                    </label>
+                    <textarea id="ref_q1" rows="2" oninput="updateProgress()" placeholder="..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-800 mb-1">
+                        2. Adakah istilah teknis yang masih terasa membingungkan? Jika ada, sebutkan istilah tersebut.
+                    </label>
+                    <textarea id="ref_q2" rows="2" oninput="updateProgress()" placeholder="..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-800 mb-1">
+                        3. Bagaimana kalian akan menerapkan pemahaman tentang standar jaringan ini ketika kelak bekerja di dunia industri?
+                    </label>
+                    <textarea id="ref_q3" rows="2" oninput="updateProgress()" placeholder="..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- RUBRIK PENILAIAN & NILAI AKHIR -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 card-box">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-slate-800 text-white rounded-lg text-xs font-bold">RUBRIK</span>
+                    <h2 class="text-lg font-bold text-slate-900">Rubrik Penilaian & Evaluasi Guru</h2>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-slate-500 block">Total Nilai Akhir</span>
+                    <span id="finalScoreDisplay" class="text-2xl font-extrabold text-blue-600">75 / 100</span>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto mb-6">
+                <table class="w-full text-xs text-left border-collapse border border-slate-200 rounded-xl">
+                    <thead class="bg-slate-100 text-slate-700 font-bold uppercase">
+                        <tr>
+                            <th class="p-3 border">Aspek Penilaian</th>
+                            <th class="p-3 border">Skor 4 (Sangat Baik)</th>
+                            <th class="p-3 border">Skor 3 (Baik)</th>
+                            <th class="p-3 border">Skor 2 (Cukup)</th>
+                            <th class="p-3 border text-center no-print">Pilih Skor</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr>
+                            <td class="p-3 border font-semibold">Ketepatan konsep standar kabel & nirkabel</td>
+                            <td class="p-3 border">Seluruh jawaban tepat & alasan logis</td>
+                            <td class="p-3 border">Sebagian besar jawaban tepat</td>
+                            <td class="p-3 border">Sebagian jawaban keliru</td>
+                            <td class="p-3 border text-center no-print">
+                                <select onchange="calculateScore()" id="score1" class="border rounded p-1 font-bold">
+                                    <option value="4">4</option>
+                                    <option value="3" selected>3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 border font-semibold">Kelengkapan tabel identifikasi</td>
+                            <td class="p-3 border">Tabel terisi lengkap & benar</td>
+                            <td class="p-3 border">Tabel lengkap, sedikit kurang tepat</td>
+                            <td class="p-3 border">Tabel terisi sebagian</td>
+                            <td class="p-3 border text-center no-print">
+                                <select onchange="calculateScore()" id="score2" class="border rounded p-1 font-bold">
+                                    <option value="4">4</option>
+                                    <option value="3" selected>3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 border font-semibold">Analisis studi kasus</td>
+                            <td class="p-3 border">Rekomendasi tepat, alasan teknis kuat</td>
+                            <td class="p-3 border">Rekomendasi tepat, alasan kurang lengkap</td>
+                            <td class="p-3 border">Rekomendasi kurang tepat</td>
+                            <td class="p-3 border text-center no-print">
+                                <select onchange="calculateScore()" id="score3" class="border rounded p-1 font-bold">
+                                    <option value="4">4</option>
+                                    <option value="3" selected>3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 border font-semibold">Refleksi & sikap belajar</td>
+                            <td class="p-3 border">Reflektif, jujur & komunikatif</td>
+                            <td class="p-3 border">Cukup reflektif</td>
+                            <td class="p-3 border">Jawaban singkat/kurang reflektif</td>
+                            <td class="p-3 border text-center no-print">
+                                <select onchange="calculateScore()" id="score4" class="border rounded p-1 font-bold">
+                                    <option value="4">4</option>
+                                    <option value="3" selected>3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Signature Block -->
+            <div class="mt-8 pt-6 border-t border-slate-200 grid grid-cols-2 gap-8 text-center text-xs text-slate-700">
+                <div>
+                    <p class="mb-12 font-semibold">Mengetahui,<br>Guru Mata Pelajaran</p>
+                    <p class="border-b border-slate-400 w-48 mx-auto font-bold">GIANTO, S. Kom</p>
+                    <p class="text-[11px] text-slate-600 mt-1">NIP. 19830725 202221 1 011</p>
+                </div>
+                <div>
+                    <p id="tglTandaTangan" class="mb-12 font-semibold">Candipuro, ......................... 2026<br>Peserta Didik</p>
+                    <p class="border-b border-slate-400 w-48 mx-auto font-bold" id="namaTandaTangan">(.............................................)</p>
+                    <p class="text-[11px] text-slate-600 mt-1" id="nisnTandaTangan"></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Color mapping definitions
+        const colorData = {
+            "WG": { name: "Putih-Hijau", style: "color-stripe-wg text-slate-900 border border-slate-300" },
+            "G":  { name: "Hijau", style: "bg-emerald-600 text-white" },
+            "WO": { name: "Putih-Orange", style: "color-stripe-wo text-slate-900 border border-slate-300" },
+            "O":  { name: "Orange", style: "bg-orange-500 text-white" },
+            "WB": { name: "Putih-Biru", style: "color-stripe-wb text-slate-900 border border-slate-300" },
+            "B":  { name: "Biru", style: "bg-blue-600 text-white" },
+            "WBr":{ name: "Putih-Cokelat", style: "color-stripe-wbr text-slate-900 border border-slate-300" },
+            "Br": { name: "Cokelat", style: "bg-amber-900 text-white" }
+        };
+
+        const correct568A = ["WG", "G", "WO", "B", "WB", "O", "WBr", "Br"];
+        const correct568B = ["WO", "O", "WG", "B", "WB", "G", "WBr", "Br"];
+
+        let currentActiveTab = "568B"; // default tab
+
+        function switchVisualTab(tab) {
+            currentActiveTab = tab;
+            const btnA = document.getElementById("btnTab568A");
+            const btnB = document.getElementById("btnTab568B");
+            const subtext = document.getElementById("visualSubtext");
+
+            if (tab === "568A") {
+                btnA.className = "flex-1 py-1.5 rounded-md text-center bg-indigo-600 text-white shadow font-bold";
+                btnB.className = "flex-1 py-1.5 rounded-md text-center text-slate-400 hover:text-white font-bold";
+                subtext.innerHTML = 'Tampilan fisik susunan kabel saat dimasukkan ke dalam RJ-45 (<span class="font-bold text-amber-300">Standar T568A</span>):';
+            } else {
+                btnB.className = "flex-1 py-1.5 rounded-md text-center bg-indigo-600 text-white shadow font-bold";
+                btnA.className = "flex-1 py-1.5 rounded-md text-center text-slate-400 hover:text-white font-bold";
+                subtext.innerHTML = 'Tampilan fisik susunan kabel saat dimasukkan ke dalam RJ-45 (<span class="font-bold text-amber-300">Standar T568B</span>):';
+            }
+
+            renderVisualConnector();
+        }
+
+        function renderVisualConnector() {
+            const prefix = currentActiveTab === "568A" ? "pin_568a_" : "pin_568b_";
+
+            for (let i = 1; i <= 8; i++) {
+                const selectElem = document.getElementById(`${prefix}${i}`);
+                const strandElem = document.getElementById(`strand_${i}`);
+                const labelElem = document.getElementById(`label_${i}`);
+
+                if (!selectElem || !strandElem || !labelElem) continue;
+
+                const selectedValue = selectElem.value;
+
+                if (selectedValue && colorData[selectedValue]) {
+                    const info = colorData[selectedValue];
+                    strandElem.className = `h-5 rounded flex items-center justify-between px-2.5 text-[11px] font-bold ${info.style} shadow-sm transition-all`;
+                    labelElem.textContent = info.name;
+                } else {
+                    strandElem.className = "h-5 rounded flex items-center justify-between px-2.5 text-[11px] font-mono bg-slate-900 text-slate-500 border border-slate-800 transition-all";
+                    labelElem.textContent = "-- Belum Dipilih --";
+                }
+            }
+        }
+
+        function onWiringSelectChange() {
+            renderVisualConnector();
+            updateProgress();
+        }
+
+        function checkWiringAnswers() {
+            let correctA = 0;
+            let correctB = 0;
+
+            for (let i = 1; i <= 8; i++) {
+                const valA = document.getElementById(`pin_568a_${i}`)?.value;
+                const valB = document.getElementById(`pin_568b_${i}`)?.value;
+
+                if (valA === correct568A[i - 1]) correctA++;
+                if (valB === correct568B[i - 1]) correctB++;
+            }
+
+            let msg = `HASIL PENGECEKAN URUTAN KABEL:\n`;
+            msg += `- Standar T568A: ${correctA} / 8 Pin Benar\n`;
+            msg += `- Standar T568B: ${correctB} / 8 Pin Benar\n\n`;
+
+            if (correctA === 8 && correctB === 8) {
+                msg += "🎉 Luar Biasa! Seluruh urutan kabel T568A dan T568B sudah tepat 100%!";
+            } else {
+                msg += "💡 Silakan periksa kembali referensi urutan warna di buku Bab 1.2 untuk melengkapi pin yang belum sesuai.";
+            }
+
+            alert(msg);
+        }
+
+        function updateProgress() {
+            const textInputs = document.querySelectorAll("input[type='text'], input[type='date'], textarea");
+            let filledCount = 0;
+
+            textInputs.forEach(input => {
+                if (input.value.trim() !== "") filledCount++;
+            });
+
+            // Count dropdown selections for Kegiatan 2
+            let dropdownFilled = 0;
+            for (let i = 1; i <= 8; i++) {
+                if (document.getElementById(`pin_568a_${i}`)?.value) dropdownFilled++;
+                if (document.getElementById(`pin_568b_${i}`)?.value) dropdownFilled++;
+            }
+
+            const totalFields = textInputs.length + 16;
+            const currentTotal = filledCount + dropdownFilled;
+            const percentage = Math.min(100, Math.round((currentTotal / totalFields) * 100));
+
+            const progressBar = document.getElementById("progressBar");
+            const progressText = document.getElementById("progressText");
+
+            if (progressBar) progressBar.style.width = `${percentage}%`;
+            if (progressText) progressText.textContent = `${percentage}%`;
+
+            // Update footer signature info automatically
+            const nama = document.getElementById("inputNama")?.value.trim();
+            const nisn = document.getElementById("inputNisn")?.value.trim();
+            const tglVal = document.getElementById("inputTanggal")?.value;
+
+            if (nama && document.getElementById("namaTandaTangan")) {
+                document.getElementById("namaTandaTangan").textContent = nama;
+            } else if (document.getElementById("namaTandaTangan")) {
+                document.getElementById("namaTandaTangan").textContent = "(.............................................)";
+            }
+
+            if (nisn && document.getElementById("nisnTandaTangan")) {
+                document.getElementById("nisnTandaTangan").textContent = `NISN. ${nisn}`;
+            } else if (document.getElementById("nisnTandaTangan")) {
+                document.getElementById("nisnTandaTangan").textContent = "";
+            }
+
+            if (tglVal && document.getElementById("tglTandaTangan")) {
+                const dateObj = new Date(tglVal);
+                if (!isNaN(dateObj.getTime())) {
+                    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+                    const day = dateObj.getDate();
+                    const month = months[dateObj.getMonth()];
+                    const year = dateObj.getFullYear();
+                    document.getElementById("tglTandaTangan").innerHTML = `Candipuro, ${day} ${month} ${year}<br>Peserta Didik`;
+                }
+            } else if (document.getElementById("tglTandaTangan")) {
+                document.getElementById("tglTandaTangan").innerHTML = `Candipuro, ......................... 2026<br>Peserta Didik`;
+            }
+        }
+
+        function calculateScore() {
+            const s1 = parseInt(document.getElementById("score1")?.value || "3");
+            const s2 = parseInt(document.getElementById("score2")?.value || "3");
+            const s3 = parseInt(document.getElementById("score3")?.value || "3");
+            const s4 = parseInt(document.getElementById("score4")?.value || "3");
+
+            const totalScore = s1 + s2 + s3 + s4;
+            const finalScore = Math.round((totalScore / 16) * 100);
+
+            const displayElem = document.getElementById("finalScoreDisplay");
+            if (displayElem) {
+                displayElem.textContent = `${finalScore} / 100`;
+            }
+        }
+
+        // Initialize immediately
+        document.addEventListener("DOMContentLoaded", function() {
+            renderVisualConnector();
+            calculateScore();
+            updateProgress();
+        });
+
+        // Backup execution in case DOMContentLoaded already fired
+        renderVisualConnector();
+        calculateScore();
+        updateProgress();
+    </script>
+</body>
+</html>
